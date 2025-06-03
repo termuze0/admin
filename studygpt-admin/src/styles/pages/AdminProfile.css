@@ -1,0 +1,359 @@
+/* Admin Profile Container */
+.admin-profile {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  /* Profile Card */
+  .profile-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+  }
+  
+  /* Profile Header */
+  .profile-header {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    padding: 2rem;
+    text-align: center;
+    color: white;
+    position: relative;
+  }
+  
+  .profile-avatar {
+    width: 120px;
+    height: 120px;
+    border: 4px solid white;
+    margin-bottom: 1rem;
+    object-fit: cover;
+  }
+  
+  .profile-title h2 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 600;
+  }
+  
+  .profile-title .badge {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    margin-top: 0.5rem;
+    font-weight: 500;
+  }
+  
+  /* Profile Info */
+  .profile-info {
+    padding: 1rem 0;
+  }
+  
+  .info-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  
+  .info-item:last-child {
+    border-bottom: none;
+  }
+  
+  .info-item .icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 1rem;
+    color: #64748b;
+  }
+  
+  .info-item span {
+    font-size: 1rem;
+    color: #334155;
+  }
+  
+  /* Form Styles */
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #475569;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+  
+  .form-control:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  }
+  
+  /* Buttons */
+  .btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .btn svg {
+    margin-right: 0.5rem;
+  }
+  
+  .btn-primary {
+    background-color: #6366f1;
+    border-color: #6366f1;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #4f46e5;
+    border-color: #4f46e5;
+  }
+  
+  .btn-outline-primary {
+    background-color: transparent;
+    border-color: #6366f1;
+    color: #6366f1;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #f1f5f9;
+  }
+  
+  .btn-secondary {
+    background-color: #64748b;
+    border-color: #64748b;
+    color: white;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #475569;
+    border-color: #475569;
+  }
+  
+  /* Form Actions */
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  /* Edit Button */
+  .edit-btn {
+    margin-top: 2rem;
+    width: 100%;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .admin-profile {
+      padding: 1rem;
+    }
+    
+    .profile-header {
+      padding: 1.5rem;
+    }
+    
+    .profile-avatar {
+      width: 100px;
+      height: 100px;
+    }
+    
+    .profile-title h2 {
+      font-size: 1.5rem;
+    }
+    
+    .form-actions {
+      flex-direction: column;
+    }
+    
+    .form-actions .btn {
+      width: 100%;
+    }
+  }
+  
+  /* Dark Mode Support */
+  .dark-mode .admin-profile {
+    background-color: #1e293b;
+  }
+  
+  .dark-mode .profile-card {
+    background-color: #1e293b;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dark-mode .info-item {
+    border-bottom-color: #334155;
+  }
+  
+  .dark-mode .info-item span {
+    color: #e2e8f0;
+  }
+  
+  .dark-mode .info-item .icon {
+    color: #94a3b8;
+  }
+  
+  .dark-mode .form-label {
+    color: #cbd5e1;
+  }
+  
+  .dark-mode .form-control {
+    background-color: #334155;
+    border-color: #475569;
+    color: #f8fafc;
+  }
+  
+  .dark-mode .form-control:focus {
+    border-color: #818cf8;
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.2);
+  }
+  
+  .dark-mode .btn-outline-primary:hover {
+    background-color: #334155;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .profile-card {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  /* Utility Classes */
+  .mb-3 {
+    margin-bottom: 1rem !important;
+  }
+  
+  .mt-2 {
+    margin-top: 0.5rem !important;
+  }
+  
+  .mt-4 {
+    margin-top: 1.5rem !important;
+  }
+  
+  .text-center {
+    text-align: center !important;
+  }
+  
+  /* Badge Styles */
+  .badge {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 50rem;
+  }
+  
+  .bg-primary {
+    background-color: #6366f1 !important;
+    color: white !important;
+  }
+  
+  /* Image Styles */
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .rounded-circle {
+    border-radius: 50% !important;
+  }
+  
+  /* Card Styles */
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.5rem;
+  }
+  
+  .card-body {
+    flex: 1 1 auto;
+    padding: 1.5rem;
+  }
+  
+  /* Flex Utilities */
+  .d-flex {
+    display: flex !important;
+  }
+  
+  .align-items-center {
+    align-items: center !important;
+  }
+  
+  .justify-content-center {
+    justify-content: center !important;
+  }
+  
+  /* Spacing Utilities */
+  .p-0 {
+    padding: 0 !important;
+  }
+  
+  .p-2 {
+    padding: 0.5rem !important;
+  }
+  
+  .p-4 {
+    padding: 1.5rem !important;
+  }
+  
+  /* Width Utilities */
+  .w-100 {
+    width: 100% !important;
+  }
+  
+  /* Text Utilities */
+  .text-white {
+    color: white !important;
+  }
+  
+  /* Shadow Utilities */
+  .shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+  }
+  
+  /* Border Utilities */
+  .border-0 {
+    border: 0 !important;
+  }
+  
+  /* Position Utilities */
+  .position-relative {
+    position: relative !important;
+  }
+  
+  /* Overflow Utilities */
+  .overflow-hidden {
+    overflow: hidden !important;
+  }
