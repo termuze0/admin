@@ -1,28 +1,34 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import Sidebar from "../components/shared/Sidebar"; 
-import Overview from "../components/Overview"; 
-import Users from "../components/Users"; 
-import Ebooks from "../components/Ebooks"; 
+import { useNavigate } from "react-router-dom";
+import Sidebar from "../components/shared/Sidebar";
+import Overview from "../components/Overview";
+import Users from "../components/Users";
+import Ebooks from "../components/Ebooks";
 import Announcements from "../components/Announcements";
-import Feedback from "../components/Feedback"; 
-import '../styles/pages/Dashboard.css'
+import Feedback from "../components/Feedback";
+import '../styles/pages/Dashboard.css';
 
 export default function Dashboard() {
   const [activeComponent, setActiveComponent] = useState('Overview');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
-  // Check authentication on component mount
+  // Check if token exists on component mount
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (!user || user.role !== 'admin') {
-      navigate('/login', { replace: true }); // Redirect to /login if not authenticated or not admin
+    const tokens = localStorage.getItem('tokens');
+    if (!tokens) {
+      navigate('/login', { replace: true }); // Redirect to /login if no token
     }
   }, [navigate]);
+
+  // Initialize dark mode from localStorage
+  useEffect(() => {
+    const storedDarkMode = localStorage.getItem('darkMode') === 'true';
+    setDarkMode(storedDarkMode);
+  }, []);
 
   const renderComponent = () => {
     switch (activeComponent) {
@@ -50,31 +56,44 @@ export default function Dashboard() {
     localStorage.setItem('darkMode', !darkMode);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('tokens');
+    localStorage.removeItem('user');
+    localStorage.removeItem('darkMode');
+    navigate('/login', { replace: true });
+  };
+
   return (
     <div className={`dashboard-container ${darkMode ? 'dark-mode' : ''}`}>
-      <Sidebar 
-        setActiveComponent={setActiveComponent} 
+      <Sidebar
+        setActiveComponent={setActiveComponent}
         collapsed={sidebarCollapsed}
         toggleSidebar={toggleSidebar}
         darkMode={darkMode}
         toggleDarkMode={toggleDarkMode}
       />
-      
       <main className={`main-content ${sidebarCollapsed ? 'collapsed' : ''} ${darkMode ? 'dark-mode' : ''}`}>
         <div className="content-header">
           <h2 className="page-title">{activeComponent}</h2>
-          <button 
-            className="sidebar-toggle"
-            onClick={toggleSidebar}
-          >
-            {sidebarCollapsed ? '☰' : '✕'}
-          </button>
+          <div className="header-actions">
+            <button
+              className="sidebar-toggle"
+              onClick={toggleSidebar}
+              aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            >
+              {sidebarCollapsed ? '☰' : '✕'}
+            </button>
+            <button
+              className="logout-button"
+              onClick={handleLogout}
+              aria-label="Log out"
+            >
+              Logout
+            </button>
+          </div>
         </div>
-        
-        <div className="content-wrapper">
-          {renderComponent()}
-        </div>
+        <div className="content-wrapper">{renderComponent()}</div>
       </main>
     </div>
   );
-};
+}
