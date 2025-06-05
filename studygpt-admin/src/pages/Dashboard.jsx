@@ -83,13 +83,7 @@ export default function Dashboard() {
             >
               {sidebarCollapsed ? '☰' : '✕'}
             </button>
-            <button
-              className="logout-button"
-              onClick={handleLogout}
-              aria-label="Log out"
-            >
-              Logout
-            </button>
+            
           </div>
         </div>
         <div className="content-wrapper">{renderComponent()}</div>

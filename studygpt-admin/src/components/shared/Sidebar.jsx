@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/components/Sidebar.css';
 import { 
   FiUser, FiUsers, FiBook, FiBell, FiMessageSquare, 
@@ -16,7 +17,7 @@ const Sidebar = ({
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const profileRef = useRef(null);
-
+  const navigate = useNavigate();
   const menuItems = [
     { name: 'Overview', component: 'Overview', icon: <FiHome /> },
     { name: 'Users', component: 'Users', icon: <FiUsers /> },
@@ -24,7 +25,12 @@ const Sidebar = ({
     { name: 'Announcements', component: 'Announcements', icon: <FiBell /> },
     { name: 'Feedback', component: 'Feedback', icon: <FiMessageSquare /> },
   ];
-
+  const handleLogout = () => {
+    localStorage.removeItem('tokens');
+    localStorage.removeItem('user');
+    localStorage.removeItem('darkMode');
+    navigate('/login', { replace: true });
+  };
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -115,22 +121,24 @@ const Sidebar = ({
                 border: darkMode ? 'none' : '1px solid #dee2e6'
               }}
             >
-              <div 
-                className={`dropdown-item ${darkMode ? 'text-white' : 'text-dark'}`}
-                onClick={() => {
-                  setActiveComponent('EditProfile');
-                  setProfileDropdownOpen(false);
-                }}
-              >
-                <FiEdit className="me-2" />
-                Edit Profile
-              </div>
+            <div 
+            className={`dropdown-item ${darkMode ? 'text-white' : 'text-dark'}`}
+            onClick={() => {
+              navigate('/admin-profile'); // Navigate to admin profile route
+              setProfileDropdownOpen(false);
+            }}
+          >
+            <FiEdit className="me-2" />
+            Edit Profile
+          </div>
               <div className={`dropdown-item ${darkMode ? 'text-white' : 'text-dark'}`}>
                 <FiGlobe className="me-2" />
                 Language
               </div>
               <div className="dropdown-divider"></div>
-              <div className="dropdown-item text-danger">
+              <div className="dropdown-item text-danger" onClick={handleLogout}
+              >
+                
                 <FiLogOut className="me-2" />
                 Logout
               </div>

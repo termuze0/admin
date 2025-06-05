@@ -31,7 +31,7 @@ const Overview = () => {
     setLoading(true);
     try {
       // Add cache: 'no-store' to prevent browser from serving a stale response
-      const response = await fetch('http://127.0.0.1:8000/api/analytics/status', {
+      const response = await fetch('http://56.228.80.139/api/analytics/status', {
         cache: 'no-store' 
       });
       if (!response.ok) {

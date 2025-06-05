@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Card, 
   ListGroup, 
@@ -15,12 +15,14 @@ import {
   FiSearch,
   FiChevronDown,
   FiChevronUp,
-  FiMessageSquare
+  FiMessageSquare,
+  FiMoon,
+  FiSun
 } from 'react-icons/fi';
 import '../styles/components/Feedback.css';
 
 const Feedback = () => {
-  // Sample data - replace with actual API data
+  // Sample data - replace with actual API data    
   const [feedbackList, setFeedbackList] = useState([
     {
       id: 2,
@@ -45,6 +47,28 @@ const Feedback = () => {
   const [ratingFilter, setRatingFilter] = useState(0);
   const [sortOrder, setSortOrder] = useState('newest');
   const [expandedFeedback, setExpandedFeedback] = useState(null);
+  const [darkMode, setDarkMode] = useState(false);
+
+  // Check for user's preferred color scheme
+  useEffect(() => {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setDarkMode(prefersDark);
+    
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handler = (e) => setDarkMode(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  // Apply theme to document
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
 
   // Filter and sort feedback
   const filteredFeedback = feedbackList
@@ -105,6 +129,10 @@ const Feedback = () => {
 
   return (
     <div className="feedback-container">
+      <button className="theme-toggle" onClick={toggleDarkMode}>
+        {darkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
+      </button>
+      
       <div className="feedback-header">
         <h2 className="page-title">
           <FiMessageSquare className="me-2" />
